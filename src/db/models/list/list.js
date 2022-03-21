@@ -5,7 +5,10 @@ const taskScheme = new Schema({
   fio: String,
   doctor: String,
   date: Date,
-  сomplaint: String
+  complaint: String 
 });
 
 module.exports = Task = mongoose.model('tasks', taskScheme);
+
+
+

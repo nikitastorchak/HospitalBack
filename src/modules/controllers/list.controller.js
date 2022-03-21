@@ -2,13 +2,13 @@ const Task = require('../../db/models/list/list')
 
 module.exports.add = (req, res) => {
   const body = req.body
-  const { fio, doctor, date, сomplaint } = body
+  const { fio, doctor, date, complaint } = body
   res.set('Access-Control-Allow-Origin', '*');
   const task = new Task({
     fio: fio,
     doctor: doctor,
     date: date,
-    сomplaint: сomplaint
+    complaint: complaint
   });
   task.save().then(result => {
     res.send(result);
@@ -31,7 +31,7 @@ module.exports.update = (req, res) => {
       fio: body.fio,
       doctor: body.doctor,
       date: body.date,
-      сomplaint: body.сomplaint
+      complaint: body.complaint
     },
   }).then(result => {
     Task.find().then((result) => {
@@ -43,10 +43,13 @@ module.exports.update = (req, res) => {
 module.exports.del = (req, res) => {
   const id = req.query._id;
   if (id) {
-    Task.deleteOne({ _id: id }).then((result) => {
-      res.send(result);
+    Task.deleteOne({ _id: id }).then(result => {
+      Task.find().then((result2) => {
+      res.send(result2);
     }).catch((err) => {
       res.send(err);
     });
+    })
+    
   }
 };
