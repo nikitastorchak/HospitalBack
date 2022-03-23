@@ -1,14 +1,15 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const taskScheme = new Schema({
+const appointScheme = new Schema({
+  user_id: String,
   fio: String,
   doctor: String,
   date: Date,
   complaint: String 
 });
 
-module.exports = Task = mongoose.model('tasks', taskScheme);
+module.exports = Appoint = mongoose.model('appoints', appointScheme);
 
 
 
