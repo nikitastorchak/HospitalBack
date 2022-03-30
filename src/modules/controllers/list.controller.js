@@ -1,4 +1,4 @@
-const Task = require('../../db/models/list/list')
+const Task = require('../../db/models/list/list');
 
 module.exports.add = (req, res) => {
   const body = req.body
@@ -26,17 +26,17 @@ module.exports.show = (req, res) => {
 };
 
 module.exports.update = (req, res) => {
-  const body = req.body
+  const {user_id, fio, doctor, date, complaint, _id } = req.body
   res.set('Access-Control-Allow-Origin', '*');
-  Appoint.updateOne({ _id: body._id }, {
+  Appoint.updateOne({ _id }, {
     $set: {
-      fio: body.fio,
-      doctor: body.doctor,
-      date: body.date,
-      complaint: body.complaint
+      fio,
+      doctor,
+      date,
+      complaint
     },
   }).then(result => {
-    Appoint.find().then((result) => {
+    Appoint.find({user_id}).then((result) => {
       res.send(result);
     });
   });
@@ -52,6 +52,5 @@ module.exports.del = (req, res) => {
       res.send(err);
     });
     })
-    
   }
 };
